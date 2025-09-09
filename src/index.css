@@ -1,0 +1,189 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 247 33% 3%;
+    --foreground: 210 40% 98%;
+
+    --card: 247 33% 4%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 247 33% 3%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 252 77% 75%;
+    --primary-foreground: 247 33% 8%;
+
+    --secondary: 247 33% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 247 33% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 252 77% 75%;
+    --accent-foreground: 247 33% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 247 33% 15%;
+    --input: 247 33% 15%;
+    --ring: 252 77% 75%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 247 33% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 252 77% 75%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 247 33% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 247 33% 20%;
+    --sidebar-ring: 252 77% 75%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-brand-dark text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2000ms;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4000ms;
+  }
+  
+  /* Dynamic blob animations */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  
+  /* Floating animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Pulse glow effect */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(155, 135, 245, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(155, 135, 245, 0.8), 0 0 30px rgba(155, 135, 245, 0.6);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
+
+/* Custom styles for scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.brand.dark');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.brand.purple');
+  border-radius: 100vh;
+}
+
+/* Custom utility classes */
+@layer components {
+  .glass-panel {
+    @apply bg-opacity-10 bg-white backdrop-filter backdrop-blur-lg border border-opacity-20 border-white rounded-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-purple to-blue-400;
+  }
+  
+  .nav-link {
+    @apply relative py-2 px-4 text-sm font-medium transition-colors duration-300 hover:text-brand-purple;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute left-0 bottom-0 h-0.5 w-0 bg-brand-purple transition-all duration-300 ease-in-out;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-link.active {
+    @apply text-brand-purple;
+  }
+  
+  .nav-link.active::after {
+    @apply w-full;
+  }
+}
+
+/* Page transition animations */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
